@@ -1,12 +1,22 @@
+#include <stdlib.h>
+#include <iostream>
 #include <iterator>
 #include <string>
 #include <vector>
-#include <stdlib.h>
-#include <iostream>
 
+#include "Lab.h"
+#include "LectureHall.h"
+#include "Position.h"
 #include "Reader.h"
-#include "Room.h"
+
 #include "Functions.h"
+
+#define ROOMS 0
+#define LABS 1
+#define LECTURE_HALLS 2
+
+#define expand_it (*it)[0], atof((*it)[1].c_str()), atoi((*it)[2].c_str()), Position(atoi((*it)[3].c_str()), atoi((*it)[4].c_str()))
+#define sep cout<<"==========================================================="<<endl;
 
 using namespace std;
 
@@ -20,35 +30,49 @@ int main(int argc, char** argv) {
 
 void initializeData() {
 	vector<vector<string> > roomDetails = Reader::read("data/ROOM.txt", 5);
-	vector<vector<string> > labDetails = Reader::read("data/LAB.txt", 7);
+	vector<vector<string> > labDetails = Reader::read("data/LAB.txt", 6);
 	vector<vector<string> > lectureHallDetails = Reader::read("data/LEC.txt",
 			6);
-	rooms = parse(roomDetails);
-	labss = parse(labDetails);
-	lectureHalls = parse(lectureHallDetails);
-	print(rooms);
-	print(labss); //TODO fix missing entries
-	print(lectureHalls);
+	parse(roomDetails, ROOMS);
+	parse(labDetails, LABS);
+	parse(lectureHallDetails, LECTURE_HALLS);
+	printAll();
 }
 
-vector<Room*> parse(vector<vector<string> > roomDetails) {
-	vector<Room*> rooms;
+void parse(vector<vector<string> > roomDetails, int type) {
 	vector<vector<string> >::iterator it = roomDetails.begin();
 	while (it != roomDetails.end()) {
-		rooms.push_back( //TODO individual parser
-				new Room((*it)[0], atof((*it)[1].c_str()),
-						atoi((*it)[2].c_str()),
-						Position(atoi((*it)[3].c_str()),
-								atoi((*it)[4].c_str()))));
+		switch (type) {
+		case ROOMS:
+			rooms.push_back(new Room(expand_it));
+			break;
+			case LABS:
+			labss.push_back( new Lab(expand_it,atoi((*it)[5].c_str())));
+			break;
+			case LECTURE_HALLS:
+			lectureHalls.push_back( new LectureHall(expand_it,atoi((*it)[5].c_str())));
+			break;
+		}
 		it++;
 	}
-	return rooms;
 }
 
-void print(vector<Room*> rooms) {
-	for (unsigned int i = 0; i < rooms.size(); i++) {
-		Room r = *rooms[i];
-		cout << r.name << " " << r.area << " " << r.doors << " " << r.position.x
-				<< " " << r.position.y << endl;
+void printAll() {
+	sep
+	cout << "These are currently " << rooms.size() << " rooms: " << endl;
+	for (unsigned i = 0; i < rooms.size(); i++) {
+		rooms[i]->printRoom();
 	}
+	sep
+	cout << "These are currently " << labss.size() << " labs: " << endl;
+	for (unsigned i = 0; i < labss.size(); i++) {
+		labss[i]->printRoom();
+	}
+	sep
+	cout << "These are currently " << lectureHalls.size() << " lectureHalls: "
+			<< endl;
+	for (unsigned i = 0; i < lectureHalls.size(); i++) {
+		lectureHalls[i]->printRoom();
+	}
+	sep
 }

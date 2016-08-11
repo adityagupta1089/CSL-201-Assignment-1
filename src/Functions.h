@@ -15,9 +15,18 @@
 
 using namespace std;
 
-vector<Room> parse(string (&pColumns));
 void initializeData();
-vector<Room*> parse(vector<vector<string> > roomDetails);
-void print(vector<Room*> rooms);
+void parse(vector<vector<string> > roomDetails, int type);
+void addRoom(); //TODO
+void removeRoom(); //TODO
+void bookRoom(); //TODO
+void unbookRoom(); //TODO
+void getLectureHall(); //TODO
+void getLab(); //TODO
+void increaseEquipment(); //TODO
+void getNearestRoom(); //TODO
+void printAll(); //TODO
+void fluhInfo(); //TODO
+//TODO function overloading, operator overloading, virtual functions, function templates
 
 #endif /* FUNCTIONS_H_ */

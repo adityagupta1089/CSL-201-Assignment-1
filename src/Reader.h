@@ -1,10 +1,3 @@
-/*
- * Reader.h
- *
- *  Created on: 10-Aug-2016
- *      Author: aditya
- */
-
 #include <string>
 #include <vector>
 
@@ -14,7 +7,11 @@
 using namespace std;
 
 class Reader {
+
 public:
+	//=========================================================================
+	// READ FUNCTION
+	//=========================================================================
 	static vector<vector<string> > read(const char* pFilename, int pColumns);
 };
 

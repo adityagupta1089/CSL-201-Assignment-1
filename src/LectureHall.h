@@ -1,10 +1,3 @@
-/*
- * LectureHall.h
- *
- *  Created on: 11-Aug-2016
- *      Author: aditya
- */
-
 #ifndef LECTUREHALL_H_
 #define LECTUREHALL_H_
 
@@ -15,12 +8,36 @@
 using namespace std;
 
 class LectureHall: public Room {
+
 public:
+	//=========================================================================
+	// VARIABLES
+	//=========================================================================
 	int chairs;
+	//=========================================================================
+	// CONSTRUCTOR
+	//=========================================================================
 	LectureHall(string pName, double pArea, int pDoors, Position pPosition,
 			int pChairs);
+	//=========================================================================
+	// PRINT ITSELF
+	//=========================================================================
 	virtual void printRoom();
-	virtual ~LectureHall();
+	//=========================================================================
+	// DESTRCUTOR
+	//=========================================================================
+	virtual ~LectureHall() {
+	}
+	//=========================================================================
+	// GETTERS and SETTERS
+	//=========================================================================
+	int getChairs() const {
+		return chairs;
+	}
+
+	void setChairs(int chairs) {
+		this->chairs = chairs;
+	}
 };
 
 #endif /* LECTUREHALL_H_ */

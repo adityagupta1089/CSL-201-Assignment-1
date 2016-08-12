@@ -1,16 +1,11 @@
-/*
- * Reader.cpp
- *
- *  Created on: 10-Aug-2016
- *      Author: aditya
- */
-
 #include "Reader.h"
 
 #include <fstream>
 
 using namespace std;
-
+//=========================================================================
+// READ FUNCTION
+//=========================================================================
 vector<vector<string> > Reader::read(const char* pFilename, int pColumns) {
 	ifstream inputStream;
 	vector<vector<string> > rooms;

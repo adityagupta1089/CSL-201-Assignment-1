@@ -6,7 +6,8 @@ using namespace std;
 //=========================================================================
 // READ FUNCTION
 //=========================================================================
-vector<vector<string> > Reader::read(const char* pFilename, int pColumns) {
+vector<vector<string> > Reader::read(const char* pFilename,
+		const int pColumns) {
 	ifstream inputStream;
 	vector<vector<string> > rooms;
 	inputStream.open(pFilename);

@@ -11,7 +11,9 @@
 #define expand_self "Name: " << setw(10) << name\
 	<< ", Area: " << setw(8) << area\
 	<< ", Doors: " << setw(3) << doors\
-	<< ", Position: (" <<setw(4) << position.x << "," << setw(4) << position.y << ")"
+	<< ", Position: (" <<setw(4) << position.x\
+	<< "," << setw(4) << position.y << ")"\
+	<< ", Booked: "<< ((booked)?"Yes":"No")
 
 using namespace std;
 
@@ -44,34 +46,19 @@ public:
 	virtual ~Room() {
 	}
 	//=========================================================================
+	// COMPARATOR
+	//=========================================================================
+	bool operator==(const Room& r);
+	//=========================================================================
 	// GETTERS and SETTERS
 	//=========================================================================
-	double getArea() const {
-		return area;
-	}
-
-	bool isBooked() const {
-		return booked;
-	}
-
-	void book() {
-		this->booked = true;
-	}
-	void unbook() {
-		this->booked = false;
-	}
-
-	int getDoors() const {
-		return doors;
-	}
-
-	const string& getName() const {
-		return name;
-	}
-
-	Position getPosition() const {
-		return position;
-	}
+	double getArea() const;
+	bool isBooked() const;
+	void book();
+	void unbook();
+	int getDoors() const;
+	const string& getName() const;
+	Position getPosition() const;
 };
 
 #endif /* ROOM_H_ */

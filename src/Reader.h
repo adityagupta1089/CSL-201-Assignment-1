@@ -12,7 +12,8 @@ public:
 	//=========================================================================
 	// READ FUNCTION
 	//=========================================================================
-	static vector<vector<string> > read(const char* pFilename, int pColumns);
+	static vector<vector<string> > read(const char* pFilename,
+			const int pColumns);
 };
 
 #endif /* READER_H_ */

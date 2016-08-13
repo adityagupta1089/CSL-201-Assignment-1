@@ -20,4 +20,17 @@ Lab::Lab(string pName, double pArea, int pDoors, Position pPosition,
 void Lab::printRoom() {
 	cout << expand_self << ", Computers: " << setw(4) << computers << endl;
 }
+//=========================================================================
+// GETTERS and SETTERS
+//=========================================================================
+int Lab::getComputers() const {
+	return computers;
+}
 
+void Lab::setComputers(int computers) {
+	this->computers = computers;
+}
+
+double Lab::getEquipmentDensity() {
+	return computers / area;
+}

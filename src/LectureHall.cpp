@@ -17,6 +17,16 @@ LectureHall::LectureHall(string pName, double pArea, int pDoors,
 // PRINT ITSELF
 //=========================================================================
 void LectureHall::printRoom() {
-	cout << expand_self << " Chairs: " << setw(4) << chairs << endl;
+	cout << expand_self << ", Chairs: " << setw(4) << chairs << endl;
+}
+//=========================================================================
+// GETTERS and SETTERS
+//=========================================================================
+int LectureHall::getChairs() const {
+	return chairs;
+}
+
+void LectureHall::setChairs(int chairs) {
+	this->chairs = chairs;
 }
 

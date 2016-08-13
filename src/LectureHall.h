@@ -31,13 +31,8 @@ public:
 	//=========================================================================
 	// GETTERS and SETTERS
 	//=========================================================================
-	int getChairs() const {
-		return chairs;
-	}
-
-	void setChairs(int chairs) {
-		this->chairs = chairs;
-	}
+	int getChairs() const;
+	void setChairs(int chairs);
 };
 
 #endif /* LECTUREHALL_H_ */

@@ -31,13 +31,9 @@ public:
 	//=========================================================================
 	// GETTERS and SETTERS
 	//=========================================================================
-	int getComputers() const {
-		return computers;
-	}
-
-	void setComputers(int computers) {
-		this->computers = computers;
-	}
+	int getComputers() const;
+	void setComputers(int computers);
+	double getEquipmentDensity();
 };
 
 #endif /* LAB_H_ */

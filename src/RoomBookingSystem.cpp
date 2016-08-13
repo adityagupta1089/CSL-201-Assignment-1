@@ -146,21 +146,25 @@ LectureHall* RoomBookingSystem::getLectureHall(const int pX,
 	return getRoom<LectureHall>(lectureHalls, Matchers::MatchPosition(pX, pY));
 }
 //==============================================================================
-vector<Room>* RoomBookingSystem::getMinimumRoomsOfArea(
+vector<Room> RoomBookingSystem::getMinimumRoomsOfArea(
 		const int pRequiredArea) const {
-	//TODO NZEC occuring
-	//TODO warning
 	vector<int> roomIndices;
-	vector<Room>* requiredRoom;
+	vector<Room> requiredRoom;
 	for (unsigned i = 0; i < rooms.size(); i++)
 		roomIndices.push_back(i);
 	sort(roomIndices.begin(), roomIndices.end(), RoomComparator());
 	double area = 0;
-	for (unsigned i = 0; i < roomIndices.size() && area < pRequiredArea; i++) {
+	for (unsigned i = 0;
+			i < roomIndices.size() && area < pRequiredArea
+					&& !rooms[roomIndices[i]].isBooked(); i++) {
 		area += rooms[roomIndices[i]].getArea();
-		requiredRoom->push_back(rooms[roomIndices[i]]);
+		requiredRoom.push_back(rooms[roomIndices[i]]);
 	}
-	return requiredRoom;
+	if (area >= pRequiredArea)
+		return requiredRoom;
+	else
+		cerr << "Not Enough Rooms." << endl;
+	throw;
 }
 //=========================================================================
 // COMPARES ROOM BASED ON AREA AND WHETHER THEY ARE BOOKED FOR
@@ -171,10 +175,9 @@ bool RoomBookingSystem::RoomComparator::operator()(const int i, const int j) {
 	bool b2 = rooms[j].isBooked();
 	if (b1 && !b2) {
 		return i;
-	} else if (!b1 && !b2) {
+	} else if (!b1 && b2) {
 		return j;
-	} else {
-		//also included case !b1&&!b2
+	} else {	//also included case !b1&&!b2
 		return rooms[i].getArea() >= rooms[j].getArea();
 	}
 }

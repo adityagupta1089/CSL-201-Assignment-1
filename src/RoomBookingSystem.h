@@ -34,6 +34,10 @@ class RoomBookingSystem {
 	// FUNCTION TO PRINT
 	//=========================================================================
 	template<typename T> void print(vector<T>& vec, const string& pDescriptor);
+	//=========================================================================
+	// COMPARES ROOM BASED ON AREA AND WHETHER THEY ARE BOOKED FOR
+	// `getMinimumRoomsOfArea`
+	//=========================================================================
 	struct RoomComparator {
 		bool operator()(const int i, const int j);
 	};
@@ -75,7 +79,7 @@ public:
 	Lab* getLab(const int pX, const int pY) const;
 	LectureHall* getLectureHall(const int pX, const int pY) const;
 	//=========================================================================
-	vector<Room>* getMinimumRoomsOfArea(const int pRequiredArea) const;
+	vector<Room> getMinimumRoomsOfArea(const int pRequiredArea) const;
 	LectureHall* getSmallestLectureHallByChairs(
 			const int pRequiredChairs) const;
 	Lab* getLabByLeastEquipmentDensity() const;

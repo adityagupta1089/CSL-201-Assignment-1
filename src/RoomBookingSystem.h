@@ -64,11 +64,6 @@ public:
 	void removeLab(const Lab& r);
 	void removeLectureHall(const LectureHall& r);
 	//=========================================================================
-	// FUNCTIONS TO BOOK/UNBOOK ROOMS
-	//=========================================================================
-	void bookRoom(const Room &r);
-	void unbookRoom(const Room &r);
-	//=========================================================================
 	// FUCNTIONS TO GET ROOMS/LECTURE HALLS/LABS
 	//=========================================================================
 	Room*getRoom(const string& pName) const;
@@ -80,7 +75,7 @@ public:
 	LectureHall* getLectureHall(const int pX, const int pY) const;
 	//=========================================================================
 	vector<Room> getMinimumRoomsOfArea(const int pRequiredArea) const;
-	LectureHall* getSmallestLectureHallByChairs(
+	LectureHall* getSmallestLectureHallByStudents(
 			const int pRequiredChairs) const;
 	Lab* getLabByLeastEquipmentDensity() const;
 	Room* getNearestRoom(const int pX, const int pY) const;

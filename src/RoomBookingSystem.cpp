@@ -183,7 +183,7 @@ bool RoomBookingSystem::RoomComparator::operator()(const int i, const int j) {
 }
 
 //==============================================================================
-LectureHall* RoomBookingSystem::getSmallestLectureHallByChairs(
+LectureHall* RoomBookingSystem::getSmallestLectureHallByStudents(
 		const int pRequiredChairs) const {
 	double minArea = DBL_MAX;
 	LectureHall* requiredHall;

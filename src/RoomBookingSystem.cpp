@@ -46,6 +46,7 @@ RoomBookingSystem::RoomBookingSystem() {
 }
 
 RoomBookingSystem::~RoomBookingSystem() {
+
 	//TODO write to output file
 }
 //==============================================================================

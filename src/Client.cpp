@@ -118,7 +118,7 @@ Room* Client::getRoom(int type) {
 		}
 	}
 }
-void Client::bookUnbook() { //TODO book unbook
+void Client::bookUnbook() {
 	Room* r = getRoom(getRoomType());
 	cout << "This room is " << ((r->isBooked()) ? "booked" : "un-booked") << ". Do you want to " << ((r->isBooked()) ? "un-book" : "book") << " it?" << endl;
 	char toggleBook = 'z';
@@ -204,7 +204,6 @@ template<typename T> T Client::input(const string& s) const {
 //=========================================================================
 // MAIN
 //=========================================================================
-//TODO empty lists
 int main(int argc, char **argv) {
 	Client client = *new Client();
 	while (true) {

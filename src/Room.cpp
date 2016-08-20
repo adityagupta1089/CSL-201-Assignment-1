@@ -7,8 +7,7 @@ using namespace std;
 // CONSTRUCTOR
 //=========================================================================
 Room::Room(string pName, double pArea, int pDoors, Position pPosition) :
-		name(pName), area(pArea), doors(pDoors), position(pPosition), booked(
-				false) {
+		name(pName), area(pArea), doors(pDoors), position(pPosition), booked(false) {
 }
 //=========================================================================
 // PRINT ITSELF
@@ -20,8 +19,7 @@ void Room::printRoom() {
 // COMPARATOR
 //=========================================================================
 bool Room::operator==(const Room& r) {
-	return name == r.name && position.x == r.position.x
-			&& position.y == r.position.y;
+	return name == r.name && position.x == r.position.x && position.y == r.position.y;
 }
 //=========================================================================
 // GETTERS and SETTERS

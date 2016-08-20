@@ -8,12 +8,11 @@ using namespace std;
 
 class Reader {
 
-public:
-	//=========================================================================
-	// READ FUNCTION
-	//=========================================================================
-	static vector<vector<string> > read(const char* pFilename,
-			const int pColumns);
+	public:
+		//=========================================================================
+		// READ FUNCTION
+		//=========================================================================
+		static vector<vector<string> > read(const char* pFilename, const int pColumns);
 };
 
 #endif /* READER_H_ */

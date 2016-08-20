@@ -9,8 +9,7 @@ using namespace std;
 //=========================================================================
 // CONSTRUCTOR
 //=========================================================================
-Lab::Lab(string pName, double pArea, int pDoors, Position pPosition,
-		int pComputers) :
+Lab::Lab(string pName, double pArea, int pDoors, Position pPosition, int pComputers) :
 		Room(pName, pArea, pDoors, pPosition) {
 	computers = pComputers;
 }

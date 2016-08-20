@@ -14,75 +14,59 @@ class Lab;
 class LectureHall;
 
 using namespace std;
+//==============================================================================
+// MACROS TO HELP DEFINE ROOM-TYPES
+//==============================================================================
+#define ROOMS 1
+#define LABS 2
+#define LECTURE_HALLS 3
+
 //TODO make readme
 class RoomBookingSystem {
 
-	//=========================================================================
-	// FUNCTION TO PARSE READ DATA FROM FILE / CONSTRUCTOR HELPER FUNCTION
-	//=========================================================================
-	void parse(vector<vector<string> > roomDetails, int type);
-	//=========================================================================
-	// FUNCTION TO FIND ROOM
-	//=========================================================================
-	template<typename T, typename U> T* getRoom(vector<T>& vec,
-			const U matcher) const;
-	//=========================================================================
-	// FUNCTION TO REMOVE ROOM
-	//=========================================================================
-	template<typename T> void remove(vector<T>& vec, const T& t);
-	//=========================================================================
-	// FUNCTION TO PRINT
-	//=========================================================================
-	template<typename T> void print(vector<T>& vec, const string& pDescriptor);
-	//=========================================================================
-	// COMPARES ROOM BASED ON AREA AND WHETHER THEY ARE BOOKED FOR
-	// `getMinimumRoomsOfArea`
-	//=========================================================================
-	struct RoomComparator {
-		bool operator()(const int i, const int j);
-	};
-public:
+		//=========================================================================
+		// INTERNAL FUNCTIONS
+		//=========================================================================
+		void parse(vector<vector<string> > roomDetails, int type);
+		vector<Room*>* getList(int type);
+		vector<Room*>* getConstList(int type) const;
+		template<typename T> Room* getRoom(int type, const T matcher) const;
+		template<typename T> void print(vector<Room*>& vec, const string& pDescriptor);
+		struct RoomComparator {
+				bool operator()(const int i, const int j);
+		};
+	public:
 
-	//=========================================================================
-	// CONSTRCUTOR AND DESTRUCTOR
-	//=========================================================================
-	RoomBookingSystem();
-	~RoomBookingSystem();
-	//=========================================================================
-	// FUNCTIONS TO ADD ROOMS/LABS/LECTURE HALLS
-	//=========================================================================
-	void addRoom(const string& pName, const double pArea, const int pDoors,
-			const int pX, const int pY);
-	void addLab(const string& pName, const double pArea, const int pDoors,
-			const int pX, const int pY, int pComputers);
-	void addLectureHall(const string& pName, const double pArea,
-			const int pDoors, const int pX, const int pY, const int pChairs);
-	//=========================================================================
-	// FUNCTIONS TO REMOVE ROOMS
-	//=========================================================================
-	void removeRoom(const Room& r);
-	void removeLab(const Lab& r);
-	void removeLectureHall(const LectureHall& r);
-	//=========================================================================
-	// FUCNTIONS TO GET ROOMS/LECTURE HALLS/LABS
-	//=========================================================================
-	Room*getRoom(const string& pName) const;
-	Lab* getLab(const string& pName) const;
-	LectureHall* getLectureHall(const string& pName) const;
-	//=========================================================================
-	Room* getRoom(const int pX, const int pY) const;
-	Lab* getLab(const int pX, const int pY) const;
-	LectureHall* getLectureHall(const int pX, const int pY) const;
-	//=========================================================================
-	vector<Room> getMinimumRoomsOfArea(const int pRequiredArea) const;
-	LectureHall* getSmallestLectureHallByStudents(
-			const int pRequiredChairs) const;
-	Lab* getLabByLeastEquipmentDensity() const;
-	Room* getNearestRoom(const int pX, const int pY) const;
-	//=========================================================================
-	// PRINTING FUCNTIONS
-	//=========================================================================
-	void printAll();
+		//=========================================================================
+		// CONSTRCUTOR AND DESTRUCTOR
+		//=========================================================================
+		RoomBookingSystem();
+		~RoomBookingSystem();
+		//=========================================================================
+		// FUNCTIONS TO ADD ROOMS/LABS/LECTURE HALLS
+		//=========================================================================
+		void addRoom(const string& pName, const double pArea, const int pDoors, const int pX, const int pY);
+		void addLab(const string& pName, const double pArea, const int pDoors, const int pX, const int pY, int pComputers);
+		void addLectureHall(const string& pName, const double pArea, const int pDoors, const int pX, const int pY, const int pChairs);
+		//=========================================================================
+		// FUNCTION TO REMOVE ROOMS
+		//=========================================================================
+		bool removeRoom(int type, Room* r);
+		//=========================================================================
+		// FUCNTIONS TO GET ROOMS/LECTURE HALLS/LABS
+		//=========================================================================
+		Room* getRoom(const string& pName, int type) const;
+		//=========================================================================
+		Room* getRoom(const int pX, const int pY, int type) const;
+		//=========================================================================
+		vector<Room*> getMinimumRoomsOfArea(const int pRequiredArea) const;
+		LectureHall* getSmallestLectureHallByStudents(const int pRequiredChairs) const;
+		Lab* getLabByLeastEquipmentDensity() const;
+		Room* getNearestRoom(const int pX, const int pY) const;
+		//=========================================================================
+		// PRINTING FUCNTIONS
+		//=========================================================================
+		void printAll();
 
 };
 

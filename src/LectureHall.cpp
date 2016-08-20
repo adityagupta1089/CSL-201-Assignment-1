@@ -8,8 +8,7 @@ using namespace std;
 //=========================================================================
 // CONSTRUCTOR
 //=========================================================================
-LectureHall::LectureHall(string pName, double pArea, int pDoors,
-		Position pPosition, int pChairs) :
+LectureHall::LectureHall(string pName, double pArea, int pDoors, Position pPosition, int pChairs) :
 		Room(pName, pArea, pDoors, pPosition) {
 	chairs = pChairs;
 }

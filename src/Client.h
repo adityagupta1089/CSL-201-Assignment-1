@@ -7,20 +7,25 @@ using namespace std;
 
 class Client {
 
-	RoomBookingSystem rbs;
-public:
-	Client();
-	void printChoices();
-	int getRoomType();
-	int getRoomByWhat();
-	void addRoom();
-	void getMinimumRoomsofArea();
-	void printAll();
-	void getSmallestLectureHallForGivenStudents();
-	void getNearestRoom();
-	template<typename T> void removeRoom();
-	template<typename T> void bookUnbook();
-	template<typename T> T& getRoom(int type);
+		RoomBookingSystem* rbs;
+
+		int getRoomType();
+		int getRoomByWhat();
+		Room* getRoom(int type);
+		template<typename T> T input(const string& s) const;
+
+	public:
+
+		Client();
+		void printChoices();
+		void addRoom();
+		void getMinimumRoomsofArea();
+		void printAll();
+		void getSmallestLectureHallForGivenStudents();
+		void getLeastEquipmentDensityLab();
+		void getNearestRoom();
+		void removeRoom();
+		void bookUnbook();
 };
 
 #endif /* CLIENT_H_ */

@@ -8,12 +8,8 @@
 //=========================================================================
 // MACRO TO HELP WHILE PRINTING ITSELF
 //=========================================================================
-#define expand_self "Name: " << setw(10) << name\
-	<< ", Area: " << setw(8) << area\
-	<< ", Doors: " << setw(3) << doors\
-	<< ", Position: (" <<setw(4) << position.x\
-	<< "," << setw(4) << position.y << ")"\
-	<< ", Booked: "<< ((booked)?"Yes":"No")
+
+#define expand_self "Name: "<<name<<"\tArea: "<<area<<"\tDoors: "<<doors<<"\tPosition: ("<<position.x<<","<<position.y<<")\tBooked: "<<((booked)?"Yes":"No")
 
 using namespace std;
 

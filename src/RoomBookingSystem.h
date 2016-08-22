@@ -35,6 +35,9 @@ class RoomBookingSystem {
 		struct RoomComparator {
 				bool operator()(const int i, const int j);
 		};
+		void saveRooms(vector<Room*> vec, const char* loc);
+		vector<vector<string> > read(const char* pFilename, const int pColumns);
+
 	public:
 
 		//=========================================================================

@@ -41,6 +41,9 @@ void Client::printChoices() {
 Client::Client() {
 	rbs = new RoomBookingSystem();
 }
+Client::~Client() {
+	delete rbs;
+}
 //=========================================================================
 // HELPER FUNCTIONS
 //=========================================================================
@@ -117,6 +120,7 @@ Room* Client::getRoom(int type) {
 			return rbs->getRoom(x, y, type);
 		}
 	}
+	return NULL;
 }
 void Client::bookUnbook() {
 	Room* r = getRoom(getRoomType());
@@ -205,9 +209,9 @@ template<typename T> T Client::input(const string& s) const {
 // MAIN
 //=========================================================================
 int main(int argc, char **argv) {
-	Client client = *new Client();
+	Client* client = new Client();
 	while (true) {
-		client.printChoices();
+		client->printChoices();
 		int choice;
 		while (!(cin >> choice) || choice < 1 || choice > 9) {
 			cout << "Please choose from 1-9" << endl;
@@ -216,30 +220,31 @@ int main(int argc, char **argv) {
 		}
 		switch (choice) {
 			case 1:
-				client.addRoom();
+				client->addRoom();
 				break;
 			case 2:
-				client.removeRoom();
+				client->removeRoom();
 				break;
 			case 3:
-				client.bookUnbook();
+				client->bookUnbook();
 				break;
 			case 4:
-				client.getMinimumRoomsofArea();
+				client->getMinimumRoomsofArea();
 				break;
 			case 5:
-				client.getSmallestLectureHallForGivenStudents();
+				client->getSmallestLectureHallForGivenStudents();
 				break;
 			case 6:
-				client.getLeastEquipmentDensityLab();
+				client->getLeastEquipmentDensityLab();
 				break;
 			case 7:
-				client.getNearestRoom();
+				client->getNearestRoom();
 				break;
 			case 8:
-				client.printAll();
+				client->printAll();
 				break;
 			case 9:
+				delete client;
 				cout << "Exited." << endl;
 				exit(0);
 				break;
@@ -251,6 +256,7 @@ int main(int argc, char **argv) {
 		}
 		if (cont == 'n') {
 			cout << "Exited." << endl;
+			delete client;
 			exit(0);
 			break;
 		}

@@ -17,6 +17,7 @@ class Client {
 	public:
 
 		Client();
+		~Client();
 		void printChoices();
 		void addRoom();
 		void getMinimumRoomsofArea();

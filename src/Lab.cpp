@@ -17,7 +17,7 @@ Lab::Lab(string pName, double pArea, int pDoors, Position pPosition, int pComput
 // PRINT ITSELF
 //=========================================================================
 void Lab::printRoom() {
-	cout << expand_self << ", Computers: " << setw(4) << computers << endl;
+	cout << expand_self << "\tComputers: " << computers << endl;
 }
 //=========================================================================
 // GETTERS and SETTERS

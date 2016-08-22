@@ -4,10 +4,11 @@
 #include <algorithm>
 #include <cfloat>
 #include <climits>
+#include <fstream>
 #include <iterator>
+#include <string.h>
 
 #include "Matchers.h"
-#include "Reader.h"
 
 //==============================================================================
 // MACRO TO EXPAND ROOM-DETAILS' ITERATOR TO DETAILS AND CAST TO SPECIFIC
@@ -27,6 +28,11 @@
 // NAMESPACE
 //==============================================================================
 using namespace std;
+
+#define ROOM_FILE_LOC "data/ROOM.txt"
+#define LAB_FILE_LOC "data/LAB.txt"
+#define LECTURE_HALL_FILE_LOC "data/LEC.txt"
+
 //==============================================================================
 // DATA STORAGE VECTORS
 //==============================================================================
@@ -37,17 +43,55 @@ vector<Room*> lectureHalls;
 // CONSTRUCTOR AND DESTRUCTOR
 //==============================================================================
 RoomBookingSystem::RoomBookingSystem() {
-	vector<vector<string> > roomDetails = Reader::read("data/ROOM.txt", 5);
-	vector<vector<string> > labDetails = Reader::read("data/LAB.txt", 6);
-	vector<vector<string> > lectureHallDetails = Reader::read("data/LEC.txt", 6);
+	vector<vector<string> > roomDetails = read(ROOM_FILE_LOC, 5);
+	vector<vector<string> > labDetails = read(LAB_FILE_LOC, 6);
+	vector<vector<string> > lectureHallDetails = read(LECTURE_HALL_FILE_LOC, 6);
 	parse(roomDetails, ROOMS);
 	parse(labDetails, LABS);
 	parse(lectureHallDetails, LECTURE_HALLS);
 }
 
 RoomBookingSystem::~RoomBookingSystem() {
-
 	//TODO write to output file
+	saveRooms(rooms, ROOM_FILE_LOC);
+	saveRooms(labss, LAB_FILE_LOC);
+	saveRooms(lectureHalls, LECTURE_HALL_FILE_LOC);
+}
+vector<vector<string> > RoomBookingSystem::read(const char* pFilename, const int pColumns) {
+	ifstream inputStream;
+	vector<vector<string> > rooms;
+	inputStream.open(pFilename);
+	if (inputStream.is_open()) {
+		while (!inputStream.eof()) {
+			vector<string> roomDetails;
+			for (int i = 0; i < pColumns; i++) {
+				string detail;
+				inputStream >> detail;
+				roomDetails.push_back(detail);
+			}
+			rooms.push_back(roomDetails);
+		}
+	}
+	inputStream.close();
+	return rooms;
+}
+void RoomBookingSystem::saveRooms(vector<Room*> vec, const char* loc) {
+	ofstream outputStream;
+	outputStream.open(loc);
+	if (outputStream.is_open()) {
+		for (unsigned i = 0; i < vec.size(); i++) {
+			Room* r = vec[i];
+			outputStream << r->getName() << "\t" << r->getArea() << "\t" << r->getDoors() << "\t" << r->getPosition().x << "\t" << r->getPosition().y;
+			if (strcmp(loc, LAB_FILE_LOC)) {
+				Lab* r = (Lab*) r;
+				outputStream << r->getComputers() << endl;
+			} else if (strcmp(loc, LECTURE_HALL_FILE_LOC)) {
+				LectureHall* r = (LectureHall*) r;
+				outputStream << r->getChairs() << endl;
+			}
+		}
+	}
+	outputStream.close();
 }
 //==============================================================================
 // INT TO VECTOR
@@ -61,6 +105,7 @@ vector<Room*>* RoomBookingSystem::getList(int type) {
 		case LECTURE_HALLS:
 			return &lectureHalls;
 	}
+	return NULL;
 }
 vector<Room*>* RoomBookingSystem::getConstList(int type) const {
 	switch (type) {
@@ -71,6 +116,7 @@ vector<Room*>* RoomBookingSystem::getConstList(int type) const {
 		case LECTURE_HALLS:
 			return &lectureHalls;
 	}
+	return NULL;
 }
 //==============================================================================
 // CONSTRUCTOR-HELPER FUNCTION

@@ -1,16 +1,12 @@
 #include "Matchers.h"
 
 using namespace std;
-//=========================================================================
-// FUCNTORS TO MATCH ROOMS DETAILS
-//=========================================================================
 Matchers::MatchName::MatchName(const string& s) :
 		name(s) {
 }
 bool Matchers::MatchName::operator()(const Room* r) const {
 	return r->getName() == name;
 }
-//=========================================================================
 Matchers::MatchPosition::MatchPosition(const int pX, const int pY) :
 		x(pX), y(pY) {
 }

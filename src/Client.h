@@ -21,7 +21,7 @@ class Client {
 		void printChoices();
 		void addRoom();
 		void getMinimumRoomsofArea();
-		void printAll();
+		void printRoom();
 		void getSmallestLectureHallForGivenStudents();
 		void getLeastEquipmentDensityLab();
 		void getNearestRoom();

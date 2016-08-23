@@ -13,15 +13,9 @@ Lab::Lab(string pName, double pArea, int pDoors, Position pPosition, int pComput
 		Room(pName, pArea, pDoors, pPosition) {
 	computers = pComputers;
 }
-//=========================================================================
-// PRINT ITSELF
-//=========================================================================
 void Lab::printRoom() {
 	cout << expand_self << "\tComputers: " << computers << endl;
 }
-//=========================================================================
-// GETTERS and SETTERS
-//=========================================================================
 int Lab::getComputers() const {
 	return computers;
 }

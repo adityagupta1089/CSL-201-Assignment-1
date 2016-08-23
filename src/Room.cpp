@@ -3,27 +3,15 @@
 #include <iostream>
 
 using namespace std;
-//=========================================================================
-// CONSTRUCTOR
-//=========================================================================
 Room::Room(string pName, double pArea, int pDoors, Position pPosition) :
 		name(pName), area(pArea), doors(pDoors), position(pPosition), booked(false) {
 }
-//=========================================================================
-// PRINT ITSELF
-//=========================================================================
 void Room::printRoom() {
 	cout << expand_self << endl;
 }
-//=========================================================================
-// COMPARATOR
-//=========================================================================
 bool Room::operator==(const Room& r) {
 	return name == r.name && position.x == r.position.x && position.y == r.position.y;
 }
-//=========================================================================
-// GETTERS and SETTERS
-//=========================================================================
 double Room::getArea() const {
 	return area;
 }
@@ -49,5 +37,8 @@ const string& Room::getName() const {
 
 Position Room::getPosition() const {
 	return position;
+}
+void Room::setBooked(bool booked) {
+	this->booked = booked;
 }
 

@@ -19,10 +19,6 @@
 
 using namespace std;
 
-//=========================================================================
-// UI
-//=========================================================================
-
 void Client::printChoices() {
 	cout << "Press the corresponding keys for these operations:" << endl;
 	cout << "1. Add Room/Lab/Lecture Hall." << endl;
@@ -30,23 +26,17 @@ void Client::printChoices() {
 	cout << "3. Book/Unbook a Room/Lab/Lecture Hall." << endl;
 	cout << "4. Get minimum number of rooms to accommodate given number of persons." << endl;
 	cout << "5. Get smallest lecture hall to accommodate given number of students." << endl;
-	cout << "6. Get lab with least equipment density." << endl;
+	cout << "6. Get lab with least equipment density or change lab equipment quantities." << endl;
 	cout << "7. Find a room nearest to a location." << endl;
-	cout << "8. Print all details." << endl;
+	cout << "8. Print Room/Lab/Lecture Hall details." << endl;
 	cout << "9. Exit." << endl;
 }
-//=========================================================================
-// CONSTRUCTOR
-//=========================================================================
 Client::Client() {
 	rbs = new RoomBookingSystem();
 }
 Client::~Client() {
 	delete rbs;
 }
-//=========================================================================
-// HELPER FUNCTIONS
-//=========================================================================
 int Client::getRoomType() {
 	cout << ROOMS << ". Room." << endl;
 	cout << LABS << ". Lab." << endl;
@@ -69,15 +59,11 @@ int Client::getRoomByWhat() {
 
 void Client::addRoom() {
 	int roomType = getRoomType();
-	string name;
-	double area;
-	int doors;
-	int x, y;
-	name = input<string>("Enter Name: ");
-	area = input<double>("Enter Area: ");
-	doors = input<int>("Enter Doors: ");
-	x = input<int>("Enter Position X: ");
-	y = input<int>("Enter Position Y: ");
+	string name = input<string>("Enter Name: ");
+	double area = input<double>("Enter Area: ");
+	int doors = input<int>("Enter Doors: ");
+	int x = input<int>("Enter Position X: ");
+	int y = input<int>("Enter Position Y: ");
 	switch (roomType) {
 		case ROOMS:
 			rbs->addRoom(name, area, doors, x, y);
@@ -154,8 +140,27 @@ void Client::getMinimumRoomsofArea() {
 	for (vector<Room*>::iterator it = v.begin(); it != v.end(); it++)
 		(*it)->printRoom();
 }
-void Client::printAll() {
-	rbs->printAll();
+void Client::printRoom() {
+	int choice = -1;
+	while ((choice = input<int>("Enter 1 for specific Room/Lab/Lecture Hall and 2 for all.")) < 1 || choice > 2)
+		;
+	switch (choice) {
+		case 1: {
+			int type = getRoomType();
+			Room* r = getRoom(type);
+			if (type == LABS) {
+				((Lab*) r)->printRoom();
+			} else if (type == LECTURE_HALLS) {
+				((LectureHall*) r)->printRoom();
+			} else {
+				r->printRoom();
+			}
+			break;
+		}
+		case 2:
+			rbs->printAll();
+			break;
+	}
 }
 
 void Client::getSmallestLectureHallForGivenStudents() {
@@ -171,11 +176,29 @@ void Client::getSmallestLectureHallForGivenStudents() {
 	}
 }
 void Client::getLeastEquipmentDensityLab() {
-	Room* r = rbs->getLabByLeastEquipmentDensity();
-	if (r->getArea() > 0) { //To check if any valid Lab is returned.
-		r->printRoom();
-	} else {
-		cout << "No such Labs." << endl;
+	int choice = -1;
+	while ((choice = input<int>("Enter 1 to get the lab with least equipment density and 2 to increase equipment density of a lab.")) < 1 || choice > 2)
+		;
+	switch (choice) {
+		case 1: {
+			Room* r = rbs->getLabByLeastEquipmentDensity();
+			if (r->getArea() > 0) {
+				r->printRoom();
+			} else {
+				cout << "No such Labs." << endl;
+			}
+		}
+			break;
+		case 2: {
+			Lab* l = (Lab*) getRoom(LABS);
+			cout << "The selected lab is:" << endl;
+			l->printRoom();
+			int newEqu = -1;
+			while ((newEqu = input<int>("Enter the new Lab Equipments.")) < 0)
+				;
+			l->setComputers(newEqu);
+			break;
+		}
 	}
 }
 void Client::getNearestRoom() {
@@ -188,9 +211,6 @@ void Client::getNearestRoom() {
 	}
 }
 
-//=========================================================================
-// INPUT FUCNTION
-//=========================================================================
 template<typename T> T Client::input(const string& s) const {
 	T x;
 	do {
@@ -205,9 +225,7 @@ template<typename T> T Client::input(const string& s) const {
 	} while (true);
 	return x;
 }
-//=========================================================================
-// MAIN
-//=========================================================================
+
 int main(int argc, char **argv) {
 	Client* client = new Client();
 	while (true) {
@@ -241,7 +259,7 @@ int main(int argc, char **argv) {
 				client->getNearestRoom();
 				break;
 			case 8:
-				client->printAll();
+				client->printRoom();
 				break;
 			case 9:
 				delete client;

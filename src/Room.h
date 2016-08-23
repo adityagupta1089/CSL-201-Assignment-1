@@ -5,11 +5,8 @@
 #include <iomanip>
 
 #include "Position.h"
-//=========================================================================
-// MACRO TO HELP WHILE PRINTING ITSELF
-//=========================================================================
 
-#define expand_self "Name: "<<name<<"\tArea: "<<area<<"\tDoors: "<<doors<<"\tPosition: ("<<position.x<<","<<position.y<<")\tBooked: "<<((booked)?"Yes":"No")
+#define expand_self "Name: "<<name<<"\tArea: "<<setprecision(4)<<area<<"\tDoors: "<<doors<<"\tPosition: ("<<position.x<<","<<position.y<<")\tBooked: "<<((booked)?"Yes":"No")
 
 using namespace std;
 
@@ -17,9 +14,6 @@ class Room {
 
 	protected:
 
-		//=========================================================================
-		// VARIABLES
-		//=========================================================================
 		string name;
 		double area;
 		int doors;
@@ -28,26 +22,11 @@ class Room {
 
 	public:
 
-		//=========================================================================
-		// CONSTRUCTOR
-		//=========================================================================
 		Room(string pName, double pArea, int pDoors, Position pPosition);
-		//=========================================================================
-		// PRINT ITSELF
-		//=========================================================================
 		virtual void printRoom();
-		//=========================================================================
-		// DESTRCUTOR
-		//=========================================================================
 		virtual ~Room() {
 		}
-		//=========================================================================
-		// COMPARATOR
-		//=========================================================================
 		bool operator==(const Room& b);
-		//=========================================================================
-		// GETTERS and SETTERS
-		//=========================================================================
 		double getArea() const;
 		bool isBooked() const;
 		void book();
@@ -55,6 +34,8 @@ class Room {
 		int getDoors() const;
 		const string& getName() const;
 		Position getPosition() const;
+
+		void setBooked(bool booked);
 };
 
 #endif /* ROOM_H_ */
